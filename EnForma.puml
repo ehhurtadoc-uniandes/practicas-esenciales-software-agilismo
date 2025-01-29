@@ -1,14 +1,9 @@
 @startuml
 
-class Entrenador {
-  +int id
-  +str nombre
-  +str correo
-}
-
 class Persona {
   +int id
   +str nombre
+  +str apellido
   +float peso
   +float talla
   +datetime fecha_nacimiento
@@ -17,9 +12,21 @@ class Persona {
   +float medida_abdomen
   +float medida_cintura
   +float medida_piernas
+}
+
+class PersonaEntrenamiento {
+  +int id_persona
+  +int id_entrenamiento
   +datetime fecha_fin
   +datetime fecha_inicio
   +str razon_fin_entrenamiento
+}
+
+class Entrenamiento {
+  +int id
+  +datetime fecha
+  +Ejercicio ejercicio
+  +int repeticiones
 }
 
 class Ejercicio {
@@ -30,15 +37,8 @@ class Ejercicio {
   +str enlace_youtube
 }
 
-class Entrenamiento {
-  +int id
-  +datetime fecha
-  +Ejercicio ejercicio
-  +int repeticiones
-}
-
-Entrenador "1" -- "0..*" Persona : entrena
-Persona "1" -- "0..*" Entrenamiento : realiza
-Entrenamiento "1" -- "1" Ejercicio : usa
+Persona "1" -- "0..*" PersonaEntrenamiento : realiza
+PersonaEntrenamiento "1" -- "1" Entrenamiento : realiza
+Entrenamiento "1" *-- "0..*" Ejercicio : tiene
 
 @enduml
