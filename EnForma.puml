@@ -1,0 +1,44 @@
+@startuml
+
+class Entrenador {
+  +int id
+  +str nombre
+  +str correo
+}
+
+class Persona {
+  +int id
+  +str nombre
+  +float peso
+  +float talla
+  +datetime fecha_nacimiento
+  +float medida_brazos
+  +float medida_pecho
+  +float medida_abdomen
+  +float medida_cintura
+  +float medida_piernas
+  +datetime fecha_fin
+  +datetime fecha_inicio
+  +str razon_fin_entrenamiento
+}
+
+class Ejercicio {
+  +int id
+  +str nombre
+  +str descripcion
+  +float calorias_por_repeticion
+  +str enlace_youtube
+}
+
+class Entrenamiento {
+  +int id
+  +datetime fecha
+  +Ejercicio ejercicio
+  +int repeticiones
+}
+
+Entrenador "1" -- "0..*" Persona : entrena
+Persona "1" -- "0..*" Entrenamiento : realiza
+Entrenamiento "1" -- "1" Ejercicio : usa
+
+@enduml
